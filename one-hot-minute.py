@@ -44,7 +44,7 @@ def my_sleeping_function():
 # Generate 10 sleeping tasks, sleeping 30 seconds
 for i in range(10):
     task = PythonOperator(
-        task_id='sleep_for_' + str(i),
+        task_id='sleep_' + str(i),
         python_callable=my_sleeping_function,
         dag=dag,
     )
