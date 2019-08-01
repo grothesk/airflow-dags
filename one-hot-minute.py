@@ -1,7 +1,4 @@
-from __future__ import print_function
-
 import time
-from builtins import range
 from pprint import pprint
 
 import airflow
@@ -14,7 +11,7 @@ args = {
 }
 
 dag = DAG(
-    dag_id='example_python_operator',
+    dag_id='one-hot-minute',
     default_args=args,
     schedule_interval=None,
 )
@@ -37,17 +34,18 @@ run_this = PythonOperator(
 
 
 # [START howto_operator_python_kwargs]
-def my_sleeping_function(random_base):
+def my_sleeping_function():
     """This is a function that will run within the DAG execution"""
-    time.sleep(random_base)
+    print('Gute Nacht!')
+    time.sleep(30)
+    print('Guten Morgen!')
 
 
-# Generate 5 sleeping tasks, sleeping from 0.0 to 0.4 seconds respectively
-for i in range(5):
+# Generate 10 sleeping tasks, sleeping 30 seconds
+for i in range(10):
     task = PythonOperator(
         task_id='sleep_for_' + str(i),
         python_callable=my_sleeping_function,
-        op_kwargs={'random_base': float(i) / 10},
         dag=dag,
     )
 
