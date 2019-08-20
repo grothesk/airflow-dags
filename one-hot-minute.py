@@ -37,12 +37,12 @@ run_this = PythonOperator(
 def my_sleeping_function():
     """This is a function that will run within the DAG execution"""
     print('Gute Nacht!')
-    time.sleep(10*60)
+    time.sleep(10)
     print('Guten Morgen!')
 
 
 # Generate 10 sleeping tasks, sleeping 30 seconds
-for i in range(2):
+for i in range(20):
     task = PythonOperator(
         task_id='sleep_' + str(i),
         python_callable=my_sleeping_function,
